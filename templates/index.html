@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Interview</title>
+    <script src="https://cdn.jsdelivr.net/npm/livekit-client/dist/livekit-client.umd.min.js"></script>
+    <link rel="stylesheet" href="../static/interview.css">
+</head>
+<body>
+
+    <div class="container">
+        <div id="start-form">
+            <h1>AI Interview</h1>
+            <p>Please enter your details to begin.</p>
+            <form id="user-details-form">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <button type="submit" id="start-button">Start Interview</button>
+            </form>
+        </div>
+
+        <div class="chat-container" style="display: none;">
+
+            <div class="main-content">
+                <div id="timer">10:00</div>
+
+                <div class="avatar-container">
+                    <video id="avatar-video" autoplay playsinline style="display: none;"></video>
+                    <div id="avatar-placeholder" class="avatar-placeholder">
+                        <div>🤖</div>
+                        <div>AI Interviewer</div>
+                        <div style="font-size: 0.8em; margin-top: 10px;">Initializing avatar...</div>
+                    </div>
+                    <div id="avatar-status" class="avatar-status connecting">Connecting...</div>
+                </div>
+
+                <div id="user-cam-container">
+                    <video id="user-cam" autoplay muted playsinline></video>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div id="chat-log"></div>
+                <div id="controls">
+                     <p id="status-text">Starting up...</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="end-screen" style="display: none;">
+            <h1>Thank You!</h1>
+            <p>Your interview is complete.</p>
+        </div>
+    </div>
+
+    <script src="../static/interview.js"></script>
+</body>
+</html>
