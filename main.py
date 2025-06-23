@@ -127,7 +127,7 @@ async def heygen_api_task(request: Request):
         return {"status": "ok"}, response.status_code
 
 # --- WebSocket Endpoint ---
-@app.websocket("/ws/interview/{session_id}/")
+@app.websocket("/ws/interview/{session_id:path}")
 async def websocket_endpoint(websocket: WebSocket, session_id: str):
     await connect(websocket, session_id)
     try:
@@ -136,6 +136,7 @@ async def websocket_endpoint(websocket: WebSocket, session_id: str):
             if data.get("type") == "user_answer":
                 answer = data.get("payload", {}).get("answer")
                 if answer:
+                    # Pass the email (stored in session_id) to the n8n handler
                     await forward_answer_to_n8n(session_id, answer)
     except WebSocketDisconnect:
         disconnect(session_id)
