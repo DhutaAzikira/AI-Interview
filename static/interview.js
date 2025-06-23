@@ -281,7 +281,7 @@ function connectToBackendControlSocket() {
     // NOTE: You will need to get the public URL for your deployed FastAPI backend
     // from your hosting provider (e.g., Render) and set it as an environment variable.
     // For now, we can construct it dynamically, assuming it's the same host.
-    const wsHost = new URL(FASTAPI_BASE_URL).host;
+    const wsHost = new URL("ai-interview-sandy.vercel.app").host;
     const controlWsUrl = `${wsProtocol}${wsHost}/ws/interview/${sessionId}/`;
     // --- END OF NEW LOGIC ---
 
