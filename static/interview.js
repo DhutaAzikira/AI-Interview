@@ -271,21 +271,30 @@ async function initializeHeyGenAvatar() {
 // --- 4. FASTAPI BACKEND COMMUNICATION ---
 function connectToBackendControlSocket() {
     statusText.innerText = "Connecting to interview server...";
-    const controlWsUrl = 'ws://' + window.location.host + '/ws/interview/' + sessionId + '/';
+
+    // --- THIS IS THE NEW LOGIC ---
+    // Determine which protocol to use based on the main page's URL
+    const isSecure = window.location.protocol === 'https:';
+    const wsProtocol = isSecure ? 'wss://' : 'ws://';
+
+    // Use the backend's public URL, but with the correct protocol
+    // NOTE: You will need to get the public URL for your deployed FastAPI backend
+    // from your hosting provider (e.g., Render) and set it as an environment variable.
+    // For now, we can construct it dynamically, assuming it's the same host.
+    const wsHost = new URL(FASTAPI_BASE_URL).host;
+    const controlWsUrl = `${wsProtocol}${wsHost}/ws/interview/${sessionId}/`;
+    // --- END OF NEW LOGIC ---
+
+    console.log(`Attempting to connect to WebSocket at: ${controlWsUrl}`);
     controlSocket = new WebSocket(controlWsUrl);
 
     controlSocket.onopen = () => {
         console.log("LOG: Control Socket to FastAPI backend connected.");
         showAiLoadingBubble();
     };
-    controlSocket.onmessage = async (event) => await onBackendMessage(event);
-    controlSocket.onclose = () => {
-        console.log("LOG: Control Socket to FastAPI backend closed.");
-    };
-    controlSocket.onerror = (err) => {
-        console.error("Control Socket error:", err);
-        statusText.innerText = "Connection error. Please refresh.";
-    };
+    controlSocket.onmessage = (event) => onBackendMessage(event);
+    controlSocket.onclose = () => { console.log("LOG: Control Socket to FastAPI backend closed."); };
+    controlSocket.onerror = (err) => { console.error("Control Socket error:", err); };
 }
 
 async function onBackendMessage(event) {
