@@ -6,13 +6,16 @@ from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.responses import JSONResponse
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 # --- Configuration ---
-# For a real app, load these from environment variables
-N8N_START_INTERVIEW_URL = "http://localhost:5678/webhook-test/starts-interview"
-GLADIA_API_KEY = "27e7daf5-eef9-4150-99c3-dac275d7641e"
-HEYGEN_API_KEY = "YmZmNDUwMzQ4NmMxNDgwYmFlZDM2OTQwOWE0YWZlMTgtMTc0OTgxMDcyOQ=="
-HEYGEN_SERVER_URL = "https://api.heygen.com"
+
+N8N_START_INTERVIEW_URL = os.getenv("N8N_START_INTERVIEW_URL")
+GLADIA_API_KEY = os.getenv("GLADIA_API_KEY")
+HEYGEN_API_KEY = os.getenv("HEYGEN_API_KEY")
+HEYGEN_SERVER_URL = os.getenv("HEYGEN_SERVER_URL")
 
 # --- Application Setup ---
 app = FastAPI()
