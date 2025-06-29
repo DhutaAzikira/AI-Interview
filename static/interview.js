@@ -39,7 +39,9 @@ async function startInterview(event) {
     const formData = new FormData(userDetailsForm);
     const fullName = formData.get('fullName');
     const email = formData.get('email');
+    const booking_code = formData.get('booking_code');
 
+    console.log(`LOG: Starting interview with fullName=${fullName}, email=${email}, booking_code=${booking_code}`);
     if (!fullName || !email) {
         alert('Please fill out all fields.');
         return;
@@ -58,7 +60,7 @@ async function startInterview(event) {
         const response = await fetch('/api/interview/start', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ fullName, email })
+            body: JSON.stringify({ fullName, email, booking_code })
         });
 
         if (!response.ok) {
@@ -72,9 +74,9 @@ async function startInterview(event) {
         connectToBackendControlSocket();
 
         // This is now UNCOMMENTED to activate the avatar
-        await initializeHeyGenAvatar();
+        // await initializeHeyGenAvatar();
 
-        await startGladiaConnection();
+        // await startGladiaConnection();
 
         statusText.innerText = "Waiting for first question...";
         console.log("LOG: Initial setup complete. Waiting for first question from backend.");

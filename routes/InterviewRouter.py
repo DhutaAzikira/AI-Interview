@@ -1,6 +1,8 @@
 import httpx
-from fastapi import APIRouter, Request, WebSocket, WebSocketDisconnect
+from fastapi import APIRouter, Request, WebSocket, WebSocketDisconnect, File, UploadFile
 from starlette.responses import JSONResponse
+from typing_extensions import Annotated
+
 from helper import send_personal_message, connect, disconnect, forward_answer_to_n8n, SESSIONS
 
 N8N_START_INTERVIEW_URL = "http://localhost:5678/webhook-test/starts-interview"
@@ -81,3 +83,5 @@ async def end_interview(request: Request):
     message = {'type': 'end_interview'}
     await send_personal_message(message, session_id)
     return {"status": "End interview command sent."}
+
+
