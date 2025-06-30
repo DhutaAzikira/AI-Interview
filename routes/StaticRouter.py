@@ -1,11 +1,15 @@
 from fastapi import APIRouter, Request
-from fastapi.staticfiles import StaticFiles
-from starlette.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 
-router = APIRouter()
-
+router = APIRouter(tags=["Frontend"])
 templates = Jinja2Templates(directory="templates")
 
-@router.get("/")
+@router.get(
+    "/",
+    response_class=HTMLResponse,
+    summary="Serve Homepage",
+    description="Serves the main `index.html` template which contains the frontend application."
+)
 async def get_homepage(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
