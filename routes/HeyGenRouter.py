@@ -1,9 +1,13 @@
 from fastapi import APIRouter, Request, Body, HTTPException
 import httpx
 from . import schemas
+import os
+from dotenv import load_dotenv
 
-HEYGEN_API_KEY = "MGQ3YjZhNmIxNjgyNGRlZGIwYTE3NjY5YzQzNjViZWUtMTc1MDY5MDM4OQ=="
-HEYGEN_SERVER_URL = "https://api.heygen.com"
+load_dotenv()
+
+HEYGEN_API_KEY = os.getenv("HEYGEN_API_KEY")
+HEYGEN_SERVER_URL = os.getenv("HEYGEN_SERVER_URL")
 
 router = APIRouter(tags=["2. HeyGen Streaming"])
 

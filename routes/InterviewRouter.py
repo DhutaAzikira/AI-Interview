@@ -2,8 +2,12 @@ import httpx
 from fastapi import APIRouter, Request, WebSocket, WebSocketDisconnect, Body, HTTPException
 from . import schemas
 from helper import send_personal_message, connect, disconnect, forward_answer_to_n8n, SESSIONS
+import os
+from dotenv import load_dotenv
 
-N8N_START_INTERVIEW_URL = "http://localhost:5678/webhook-test/starts-interview"
+load_dotenv()
+
+N8N_START_INTERVIEW_URL = os.getenv("N8N_START_INTERVIEW_URL")
 
 router = APIRouter(tags=["1. Interview Lifecycle"])
 

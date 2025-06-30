@@ -2,8 +2,12 @@ import httpx
 from fastapi import APIRouter, Request, Body, HTTPException
 from typing import Dict, Any
 from . import schemas
+from dotenv import load_dotenv
+import os
 
-GLADIA_API_KEY = "27e7daf5-eef9-4150-99c3-dac275d7641e"
+load_dotenv()
+
+GLADIA_API_KEY = os.getenv("GLADIA_API_KEY")
 
 router = APIRouter(tags=["3. Gladia Transcription"])
 
