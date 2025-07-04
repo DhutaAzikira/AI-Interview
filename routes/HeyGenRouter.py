@@ -15,13 +15,14 @@ router = APIRouter(tags=["2. HeyGen Streaming"])
     "/api/heygen/create_token",
     summary="Create HeyGen Streaming Token",
     description="Retrieves a temporary API token from HeyGen to initialize a streaming session.",
-    response_model=schemas.HeyGenSuccessResponse
 )
 async def heygen_create_token():
     headers = {'X-Api-Key': HEYGEN_API_KEY}
     api_url = f"{HEYGEN_SERVER_URL}/v1/streaming.create_token"
+
     async with httpx.AsyncClient() as client:
         response = await client.post(api_url, headers=headers)
+
         response.raise_for_status()
         return response.json()
 
@@ -29,7 +30,6 @@ async def heygen_create_token():
     "/api/heygen/new_session",
     summary="Create a new HeyGen streaming session",
     description="Initializes a new streaming session with the HeyGen avatar service using a valid token.",
-    response_model=schemas.HeyGenSuccessResponse,
     responses={
         400: {"model": schemas.ErrorResponse, "description": "Session token is missing."},
         502: {"model": schemas.ErrorResponse, "description": "Could not establish a video stream with HeyGen."}
@@ -79,7 +79,6 @@ async def heygen_new_session(
     summary="Start an existing HeyGen session",
     description="Starts the video stream for a previously created but inactive session. This makes the avatar active and ready to receive tasks.",
     tags=["2. HeyGen Streaming"],
-    response_model=schemas.HeyGenSuccessResponse,
     responses={
         404: {"model": schemas.ErrorResponse, "description": "Session ID not found by HeyGen."},
         502: {"model": schemas.ErrorResponse, "description": "Error communicating with HeyGen API."}
@@ -113,7 +112,6 @@ async def heygen_start_session(
 @router.post(
     "/api/heygen/stop_session",
     summary="Stop an active HeyGen session",
-    response_model=schemas.HeyGenSuccessResponse
 )
 async def heygen_stop_session(
     request: Request,
@@ -135,8 +133,7 @@ async def heygen_stop_session(
 @router.post(
     "/api/heygen/task",
     summary="Send a TTS task to HeyGen",
-    description="Sends a text prompt for the avatar to speak during the session.",
-    response_model=schemas.HeyGenTaskResponse
+    description="Sends a text prompt for the avatar to speak during the session."
 )
 async def heygen_api_task(
     request: Request,
