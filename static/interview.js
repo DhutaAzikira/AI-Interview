@@ -76,7 +76,7 @@ async function startInterview(event) {
         // This is now UNCOMMENTED to activate the avatar
         // await initializeHeyGenAvatar();
 
-        // await startGladiaConnection();
+        await startGladiaConnection();
 
         statusText.innerText = "Waiting for first question...";
         console.log("LOG: Initial setup complete. Waiting for first question from backend.");
