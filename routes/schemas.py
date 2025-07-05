@@ -70,3 +70,16 @@ class GladiaInitResponse(BaseModel):
     # Based on Gladia's likely response for initializing a live session
     session_id: str = Field(..., example="gladia_sid_123")
     livekit_url: str = Field(..., example="wss://livekit.gladia.io/...")
+
+from pydantic import BaseModel
+
+class LiveKitConnection(BaseModel):
+    """Defines the structure for LiveKit connection details."""
+    server_url: str
+    token: str
+
+class InitiateSessionResponse(BaseModel):
+    """Defines the successful response structure for the initiate_session endpoint."""
+    message: str
+    session_id: str
+    livekit_connection: LiveKitConnection

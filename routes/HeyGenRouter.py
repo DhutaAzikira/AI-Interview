@@ -169,6 +169,7 @@ async def heygen_api_task(
     "/api/heygen/initiate_session",
     summary="Initiate a complete HeyGen Streaming Session",
     description="Handles token creation, session creation, and starting the session in a single call, returning only the necessary LiveKit connection details.",
+    response_model=schemas.InitiateSessionResponse
 )
 async def initiate_heygen_session():
     """
