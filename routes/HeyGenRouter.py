@@ -115,7 +115,6 @@ async def heygen_start_session(
 @router.post(
     "/api/heygen/stop_session",
     summary="Stop an active HeyGen session",
-    deprecated=True,
 )
 async def heygen_stop_session(
     request: Request,
