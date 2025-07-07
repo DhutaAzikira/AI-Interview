@@ -68,8 +68,8 @@ class HeyGenSuccessResponse(BaseModel):
 
 class GladiaInitResponse(BaseModel):
     # Based on Gladia's likely response for initializing a live session
-    session_id: str = Field(..., example="gladia_sid_123")
-    livekit_url: str = Field(..., example="wss://livekit.gladia.io/...")
+    id: str = Field(..., example="gladia_sid_123")
+    url: str = Field(..., example="wss://livekit.gladia.io/...")
 
 from pydantic import BaseModel
 

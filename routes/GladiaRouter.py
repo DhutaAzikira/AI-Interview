@@ -24,17 +24,23 @@ router = APIRouter(tags=["3. Gladia Transcription"])
 async def gladia_api_init(
     request: Request,
     # We use a generic Dict here because it's a direct proxy.
-    request_body: Dict[str, Any] = Body(
-        ...,
-        example={"sample_rate": 48000, "encoding": "WAV"}
-    )
 ):
     headers = {'X-Gladia-Key': GLADIA_API_KEY, 'Content-Type': 'application/json'}
     try:
-        body = await request.json()
+        body = {
+            "encoding": "wav/pcm",
+            "sample_rate": 16000,
+            'model': "solaria-1",
+            "endpointing": 2,
+            "language_config": {
+                "languages": ["en", "id"],
+                "code_switching": False,
+            },
+            "maximum_duration_without_endpointing": 60,
+        }
         async with httpx.AsyncClient() as client:
             response = await client.post("https://api.gladia.io/v2/live", headers=headers, json=body)
-            response.raise_for_status()
+            print("Response from Gladia:", response.json())
             return response.json()
     except httpx.HTTPStatusError as e:
         raise HTTPException(status_code=502, detail=f"Error from Gladia: {e.response.text}")
