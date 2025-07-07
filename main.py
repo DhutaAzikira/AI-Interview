@@ -7,7 +7,7 @@ from routes import StaticRouter, InterviewRouter, HeyGenRouter, GladiaRouter
 # --- Application Setup ---
 app = FastAPI()
 
-origins = ["*"]
+origins = ["*","http://localhost:3000"]
 
 app.add_middleware(
     CORSMiddleware,
