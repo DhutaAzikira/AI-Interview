@@ -37,17 +37,12 @@ async def gladia_api_init(
                 "code_switching": False,
             },
             "maximum_duration_without_endpointing": 60,
-            "messages_config": {
-                "receive_final_transcripts": True,
-                "receive_speech_events": True,
-                "receive_pre_processing_events": True,
-                "receive_realtime_processing_events": True,
-                "receive_post_processing_events": True,
-                "receive_acknowledgments": True,
-                "receive_errors": True,
-                "receive_lifecycle_events": True
-            },
+            "realtime_processing": {
+                "translation": False,
+            }
         }
+
+
         async with httpx.AsyncClient() as client:
             response = await client.post("https://api.gladia.io/v2/live", headers=headers, json=body)
             print("Response from Gladia:", response.json())
