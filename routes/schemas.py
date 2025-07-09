@@ -81,5 +81,6 @@ class LiveKitConnection(BaseModel):
 class InitiateSessionResponse(BaseModel):
     """Defines the successful response structure for the initiate_session endpoint."""
     message: str
+    token: str
     session_id: str
     livekit_connection: LiveKitConnection
