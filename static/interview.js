@@ -49,45 +49,45 @@ async function startInterview(event) {
 
     await startGladiaConnection();
 
-    startFormContainer.style.display = 'none';
-    chatContainer.style.display = 'flex';
-
-    try {
-        console.log("LOG: Starting interview process...");
-        statusText.innerText = "Initializing session with server...";
-
-        initializeUserCamera();
-        startInterviewTimer(10);
-
-        const response = await fetch('/api/interview/start', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ fullName, email, booking_code })
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'Failed to start interview session.');
-        }
-        const data = await response.json();
-        sessionId = data.sessionId;
-        console.log(`LOG: Session ID received: ${sessionId}`);
-
-        // connectToBackendControlSocket();
-
-        // This is now UNCOMMENTED to activate the avatar
-        // await initializeHeyGenAvatar();
-
-        await startGladiaConnection();
-
-        statusText.innerText = "Waiting for first question...";
-        console.log("LOG: Initial setup complete. Waiting for first question from backend.");
-
-    } catch (error) {
-        console.error("Error starting interview:", error);
-        statusText.innerText = `Error: ${error.message}`;
-        updateAvatarStatus('disconnected', 'Connection Failed');
-    }
+    // startFormContainer.style.display = 'none';
+    // chatContainer.style.display = 'flex';
+    //
+    // try {
+    //     console.log("LOG: Starting interview process...");
+    //     statusText.innerText = "Initializing session with server...";
+    //
+    //     initializeUserCamera();
+    //     startInterviewTimer(10);
+    //
+    //     const response = await fetch('/api/interview/start', {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({ fullName, email, booking_code })
+    //     });
+    //
+    //     if (!response.ok) {
+    //         const errorData = await response.json();
+    //         throw new Error(errorData.error || 'Failed to start interview session.');
+    //     }
+    //     const data = await response.json();
+    //     sessionId = data.sessionId;
+    //     console.log(`LOG: Session ID received: ${sessionId}`);
+    //
+    //     // connectToBackendControlSocket();
+    //
+    //     // This is now UNCOMMENTED to activate the avatar
+    //     // await initializeHeyGenAvatar();
+    //
+    //     await startGladiaConnection();
+    //
+    //     statusText.innerText = "Waiting for first question...";
+    //     console.log("LOG: Initial setup complete. Waiting for first question from backend.");
+    //
+    // } catch (error) {
+    //     console.error("Error starting interview:", error);
+    //     statusText.innerText = `Error: ${error.message}`;
+    //     updateAvatarStatus('disconnected', 'Connection Failed');
+    // }
 }
 
 function endInterview() {
