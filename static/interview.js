@@ -47,6 +47,8 @@ async function startInterview(event) {
         return;
     }
 
+    await startGladiaConnection();
+
     startFormContainer.style.display = 'none';
     chatContainer.style.display = 'flex';
 
@@ -71,7 +73,7 @@ async function startInterview(event) {
         sessionId = data.sessionId;
         console.log(`LOG: Session ID received: ${sessionId}`);
 
-        connectToBackendControlSocket();
+        // connectToBackendControlSocket();
 
         // This is now UNCOMMENTED to activate the avatar
         // await initializeHeyGenAvatar();
