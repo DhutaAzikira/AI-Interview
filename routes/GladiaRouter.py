@@ -39,7 +39,11 @@ async def gladia_api_init(
             "maximum_duration_without_endpointing": 60,
             "realtime_processing": {
                 "translation": False,
-            }
+            },
+            "pre_processing": {
+                "audio_enhancer": True,
+                "speech_threshold": 0.6
+            },
         }
 
 
