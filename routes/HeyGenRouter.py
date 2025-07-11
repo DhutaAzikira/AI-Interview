@@ -198,8 +198,8 @@ async def initiate_heygen_session():
         new_session_url = f"{HEYGEN_SERVER_URL}/v1/streaming.new"
         # Using the default avatar from your provided code
         new_session_body = {
-            "quality": "medium",
-            "avatar_name": "Wayne_20240711",
+            "quality": "high",
+            "avatar_name": "Santa_Fireplace_Front_public",
             "voice": {
                 "rate": 1
             },
