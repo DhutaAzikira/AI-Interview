@@ -159,14 +159,9 @@ async def heygen_api_task(
     }
 
     api_url = f"{HEYGEN_SERVER_URL}/v1/streaming.task"
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.post(api_url, headers=headers, json=payload)
-            return {"status": "ok", "heygen_status_code": response.status_code}
-
-    except httpx.HTTPStatusError as e:
-        raise HTTPException(status_code=e.response.status_code,
-                            detail=f"Failed to send task to HeyGen: {e.response.text}")
+    async with httpx.AsyncClient() as client:
+        response = await client.post(api_url, headers=headers, json=payload)
+        return {"status": "ok", "heygen_status_code": response.status_code}
 
 
 @router.post(
@@ -194,7 +189,7 @@ async def initiate_heygen_session():
         except (KeyError, TypeError):
             raise HTTPException(status_code=500, detail="Could not parse token from HeyGen response.")
 
-        # 2. Create a new session #test
+        # 2. Create a new session
         auth_headers = {
             'Authorization': f'Bearer {streaming_token}',
             'Content-Type': 'application/json'
