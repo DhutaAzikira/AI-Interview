@@ -91,6 +91,7 @@ async def websocket_endpoint(websocket: WebSocket, session_id: str):
             data = await websocket.receive_json()
             if data.get("type") == "user_answer":
                 answer = data.get("payload", {}).get("answer")
+                print(f"Received answer from client: {answer}")
                 if answer:
                     await forward_answer_to_n8n(session_id, answer)
     except WebSocketDisconnect:
