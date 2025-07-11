@@ -42,7 +42,7 @@ async def gladia_api_init(
             },
             "pre_processing": {
                 "audio_enhancer": True,
-                "speech_threshold": 0.6
+                "speech_threshold": 0.75
             },
         }
 
