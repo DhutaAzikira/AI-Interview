@@ -199,7 +199,7 @@ async def initiate_heygen_session():
         # Using the default avatar from your provided code
         new_session_body = {
             "quality": "high",
-            "avatar_name": "Santa_Fireplace_Front_public",
+            "avatar_name": os.getenv("AVATAR_NAME"),
             "voice": {
                 "rate": 1
             },
