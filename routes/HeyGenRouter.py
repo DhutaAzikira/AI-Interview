@@ -157,6 +157,7 @@ async def heygen_api_task(
         'Authorization': f'Bearer {token}',
         'Content-Type': 'application/json'
     }
+    print("Payload:", payload)
 
     api_url = f"{HEYGEN_SERVER_URL}/v1/streaming.task"
     async with httpx.AsyncClient() as client:
