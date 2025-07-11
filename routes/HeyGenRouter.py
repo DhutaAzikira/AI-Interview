@@ -189,7 +189,7 @@ async def initiate_heygen_session():
         except (KeyError, TypeError):
             raise HTTPException(status_code=500, detail="Could not parse token from HeyGen response.")
 
-        # 2. Create a new session
+        # 2. Create a new session #test
         auth_headers = {
             'Authorization': f'Bearer {streaming_token}',
             'Content-Type': 'application/json'
