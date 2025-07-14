@@ -33,7 +33,7 @@ async def gladia_api_init(
             'model': "solaria-1",
             "endpointing": 2,
             "language_config": {
-                "languages": ["en", "id"],
+                "languages": ["id"],
                 "code_switching": False,
             },
             "maximum_duration_without_endpointing": 60,
