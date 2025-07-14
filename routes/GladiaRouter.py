@@ -29,7 +29,7 @@ async def gladia_api_init(
     try:
         body = {
             "encoding": "wav/pcm",
-            "sample_rate": 16000,
+            "sample_rate": 44100,
             'model': "solaria-1",
             "endpointing": 2,
             "language_config": {
@@ -41,7 +41,7 @@ async def gladia_api_init(
                 "translation": False,
             },
             "pre_processing": {
-                "audio_enhancer": True,
+                "audio_enhancer": False,
                 "speech_threshold": 0.75
             },
         }
