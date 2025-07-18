@@ -157,7 +157,6 @@ async def heygen_api_task(
         'Authorization': f'Bearer {token}',
         'Content-Type': 'application/json'
     }
-    print("Payload:", payload)
 
     api_url = f"{HEYGEN_SERVER_URL}/v1/streaming.task"
     async with httpx.AsyncClient() as client:
@@ -217,7 +216,6 @@ async def initiate_heygen_session():
             new_session_response = await client.post(new_session_url, headers=auth_headers, json=new_session_body,
                                                      timeout=30.0)
             new_session_response.raise_for_status()
-            print("New session response:", new_session_response.json())
             session_data = new_session_response.json()["data"]
             session_id = session_data.get("session_id")
             livekit_url = session_data.get("url")

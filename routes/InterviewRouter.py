@@ -26,8 +26,6 @@ async def start_interview(
 ):
     body = await request.json()
     booking_code = body.get('booking_code')
-    print(f"Received request to start interview with booking code: {booking_code}")
-
     try:
         async with httpx.AsyncClient() as client:
             response = await client.post(N8N_START_INTERVIEW_URL, json={'booking_code': booking_code}, timeout=30.0)
@@ -40,7 +38,6 @@ async def start_interview(
             raise HTTPException(status_code=502, detail="Backend workflow did not return a valid session ID and resume URL.")
 
         SESSIONS[session_id] = {'resumeUrl': resume_url}
-        print(f"Started session {session_id}, resumeUrl: {resume_url}")
         return {"sessionId": session_id, "resumeUrl": resume_url}
     except httpx.HTTPStatusError as e:
         raise HTTPException(status_code=502, detail=f"Error communicating with n8n workflow: {e.response.text}")
@@ -91,7 +88,6 @@ async def websocket_endpoint(websocket: WebSocket, session_id: str):
             data = await websocket.receive_json()
             if data.get("type") == "user_answer":
                 answer = data.get("payload", {}).get("answer")
-                print(f"Received answer from client: {answer}")
                 if answer:
                     await forward_answer_to_n8n(session_id, answer)
     except WebSocketDisconnect:

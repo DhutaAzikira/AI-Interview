@@ -27,10 +27,10 @@ async def send_personal_message(message: dict, session_id: str):
         print(f"SUCCESS: Sent message to session '{session_id}': {message}")
     else:
         # If no connection is found, print a detailed error message
-        print("--------------------------------------------------")
+        # print("--------------------------------------------------")
         print(f"ERROR: Could not find an active WebSocket connection for session_id: '{session_id}'")
-        print(f"Currently active connections are for these session_ids: {list(active_connections.keys())}")
-        print("--------------------------------------------------")
+        # print(f"Currently active connections are for these session_ids: {list(active_connections.keys())}")
+        # print("--------------------------------------------------")
 
 
 async def forward_answer_to_n8n(session_id: str, answer: str):
@@ -40,7 +40,7 @@ async def forward_answer_to_n8n(session_id: str, answer: str):
         return
 
     resume_url = session_data['resumeUrl']
-    print(f"Forwarding answer for session {session_id} to {resume_url}")
+    # print(f"Forwarding answer for session {session_id} to {resume_url}")
     async with httpx.AsyncClient() as client:
         try:
             await client.post(resume_url, json={'sessionId': session_id, 'answer': answer})

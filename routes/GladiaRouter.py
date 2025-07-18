@@ -49,7 +49,6 @@ async def gladia_api_init(
 
         async with httpx.AsyncClient() as client:
             response = await client.post("https://api.gladia.io/v2/live", headers=headers, json=body)
-            print("Response from Gladia:", response.json())
             return response.json()
     except httpx.HTTPStatusError as e:
         raise HTTPException(status_code=502, detail=f"Error from Gladia: {e.response.text}")
