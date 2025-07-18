@@ -28,7 +28,7 @@ async def start_interview(
     booking_code = body.get('booking_code')
     try:
         async with httpx.AsyncClient() as client:
-            response = await client.post(N8N_START_INTERVIEW_URL, json={'booking_code': booking_code}, timeout=30.0)
+            response = await client.post(N8N_START_INTERVIEW_URL, json={'booking_code': booking_code}, timeout=90.0)
             response.raise_for_status()
             n8n_data = response.json()
 
